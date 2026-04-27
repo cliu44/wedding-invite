@@ -255,29 +255,6 @@
       color: #735255;
     }
 
-    .rsvp-form {
-      display: grid;
-      gap: 8px;
-    }
-
-    .rsvp-form input,
-    .rsvp-form select,
-    .rsvp-form textarea {
-      width: 100%;
-      border: 1px solid #efc6d0;
-      border-radius: 10px;
-      padding: 10px 11px;
-      font-size: 14px;
-      color: #67464a;
-      background: #fffdfd;
-      outline: none;
-    }
-
-    .rsvp-form textarea {
-      resize: vertical;
-      min-height: 84px;
-    }
-
     .btns {
       display: flex;
       gap: 8px;
@@ -307,18 +284,6 @@
       color: #a04b5b;
     }
 
-    .chip {
-      display: inline-block;
-      background: #fff6e2;
-      color: #9d6b17;
-      border: 1px solid #f2ddb3;
-      border-radius: 999px;
-      font-size: 12px;
-      padding: 4px 10px;
-      margin-bottom: 8px;
-      font-weight: 700;
-    }
-
     .petal {
       position: fixed;
       top: -20px;
@@ -346,6 +311,14 @@
       line-height: 1.5;
     }
 
+    .tips-list {
+      margin: 0;
+      padding-left: 18px;
+      color: #735255;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
     .footer {
       text-align: center;
       margin-top: 14px;
@@ -366,7 +339,7 @@
     <section class="hero">
       <span class="tag">WEDDING INVITATION</span>
       <h1>刘辰 ♥ 李秋思</h1>
-      <p class="subtitle">诚挚邀请您见证我们的幸福时刻</p>
+      <p class="subtitle">谨定于 2026 年 09 月 19 日，敬备喜筵，恭请光临</p>
       <button class="music-btn" id="musicBtn">开启背景音乐</button>
     </section>
 
@@ -431,23 +404,6 @@
     </section>
 
     <section class="card">
-      <span class="chip">RSVP 回执</span>
-      <h2 class="title">到场回执</h2>
-      <form class="rsvp-form" id="rsvpForm">
-        <input id="guestName" type="text" placeholder="您的姓名">
-        <select id="attendance">
-          <option value="出席">我将出席</option>
-          <option value="暂不确定">暂不确定</option>
-          <option value="无法出席">无法出席</option>
-        </select>
-        <input id="guestCount" type="number" min="1" max="10" value="1" placeholder="出席人数">
-        <textarea id="guestMsg" placeholder="祝福留言（选填）"></textarea>
-        <button class="primary" type="submit">提交回执（本地保存）</button>
-      </form>
-      <p class="note" id="rsvpResult"></p>
-    </section>
-
-    <section class="card">
       <h2 class="title">到场回复</h2>
       <p style="margin:0;color:#79575c;">若您方便出席，欢迎提前告知我们，以便安排座位。</p>
       <div class="btns">
@@ -464,6 +420,15 @@
       </p>
     </section>
 
+    <section class="card">
+      <h2 class="title">温馨提示</h2>
+      <ul class="tips-list">
+        <li>建议提前 20 分钟到场，方便签到与入座。</li>
+        <li>自驾宾客可将车辆停放在酒店地面停车区。</li>
+        <li>如需协助引导，请提前联系男方或女方电话。</li>
+      </ul>
+    </section>
+
     <p class="footer">期待与您共享喜悦 · 刘辰 & 李秋思 敬邀</p>
   </main>
 
@@ -478,8 +443,6 @@
     const musicBtn = document.getElementById("musicBtn");
     const slides = Array.from(document.querySelectorAll(".slide"));
     const dots = Array.from(document.querySelectorAll(".dot"));
-    const rsvpForm = document.getElementById("rsvpForm");
-    const rsvpResult = document.getElementById("rsvpResult");
 
     function pad(num) {
       return String(num).padStart(2, "0");
@@ -556,39 +519,8 @@
       }
     }
 
-    function saveRsvp(data) {
-      const all = JSON.parse(localStorage.getItem("wedding_rsvp") || "[]");
-      all.push(data);
-      localStorage.setItem("wedding_rsvp", JSON.stringify(all));
-    }
-
-    function onSubmitRsvp(e) {
-      e.preventDefault();
-      const name = document.getElementById("guestName").value.trim();
-      const attendance = document.getElementById("attendance").value;
-      const guestCount = document.getElementById("guestCount").value;
-      const guestMsg = document.getElementById("guestMsg").value.trim();
-      if (!name) {
-        rsvpResult.textContent = "请先填写姓名。";
-        return;
-      }
-      const payload = {
-        name,
-        attendance,
-        guestCount,
-        guestMsg,
-        submittedAt: new Date().toISOString()
-      };
-      saveRsvp(payload);
-      rsvpResult.textContent = "回执提交成功，感谢回复！";
-      rsvpForm.reset();
-      document.getElementById("attendance").value = "出席";
-      document.getElementById("guestCount").value = "1";
-    }
-
     musicBtn.addEventListener("click", toggleMusic);
     copyBtn.addEventListener("click", copyInviteText);
-    rsvpForm.addEventListener("submit", onSubmitRsvp);
 
     renderCountdown();
     setInterval(renderCountdown, 1000);
