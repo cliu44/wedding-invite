@@ -281,22 +281,24 @@
     }
 
     .address-row {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr auto;
       align-items: center;
-      justify-content: space-between;
       gap: 8px;
     }
 
     .address-row .v {
-      flex: 1;
+      margin: 0;
     }
 
     .inline-nav-btn {
-      display: inline-block;
-      padding: 8px 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 10px;
       font-size: 12px;
+      line-height: 1;
       white-space: nowrap;
-      flex-shrink: 0;
     }
 
     .countdown {
@@ -454,6 +456,13 @@
       .grid2 { grid-template-columns: 1fr; }
       .tl-row { grid-template-columns: 70px 1fr; }
       .btns { flex-direction: column; }
+      .address-row {
+        grid-template-columns: 1fr auto;
+      }
+      .inline-nav-btn {
+        padding: 6px 9px;
+        font-size: 11px;
+      }
     }
   </style>
 </head>
