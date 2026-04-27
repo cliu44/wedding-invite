@@ -282,6 +282,11 @@
       font-weight: 600;
     }
 
+    /* 竖图在手机上的安全裁切：按人物主体调整焦点位置 */
+    .slide.focus-top { background-position: center 22%; }
+    .slide.focus-mid { background-position: center 40%; }
+    .slide.focus-low { background-position: center 56%; }
+
     .slide.show { opacity: 1; }
 
     .dots {
@@ -659,12 +664,12 @@
 
     <section class="slider" aria-label="婚纱照轮播">
       <div class="slides" id="slides">
-        <div class="slide show" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-1.jpg');">我们的婚礼之旅</div>
-        <div class="slide" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-2.jpg');">把喜欢写进每一天</div>
-        <div class="slide" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-3.jpg');">你的出现让未来有了名字</div>
+        <div class="slide show focus-mid" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-1.jpg');">我们的婚礼之旅</div>
+        <div class="slide focus-low" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-2.jpg');">把喜欢写进每一天</div>
+        <div class="slide focus-mid" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-3.jpg');">你的出现让未来有了名字</div>
         <div class="slide" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-4.jpg');">在落日里许下承诺</div>
         <div class="slide" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-5.jpg');">这一刻，我们把爱说给世界听</div>
-        <div class="slide" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-6.jpg');">从相识到相守，始终是你</div>
+        <div class="slide focus-mid" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-6.jpg');">从相识到相守，始终是你</div>
         <div class="slide" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-7.jpg');">在同一片天空下，我们并肩向前</div>
         <div class="slide" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-8.jpg');">感恩相遇，余生请多指教</div>
       </div>
