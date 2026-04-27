@@ -480,6 +480,7 @@
         <div class="cell">
           <div class="k">详细地址</div>
           <div class="v">薇斯汀主题宴会酒店繁花厅</div>
+          <a class="link-btn ghost" style="margin-top:8px;display:inline-block;padding:8px 12px;font-size:12px;" href="https://uri.amap.com/search?keyword=%E6%B9%96%E5%8D%97%E7%9C%81%E7%9B%8A%E9%98%B3%E5%B8%82%E8%B5%AB%E5%B1%B1%E5%8C%BA%E9%AB%98%E6%96%B0%E5%8C%BA%E6%A2%93%E5%B1%B1%E8%B7%AF2%E5%8F%B7" target="_blank" rel="noopener">打开导航</a>
         </div>
       </div>
 
@@ -527,12 +528,8 @@
         <button class="ghost" id="copyRsvpBtn">复制回执模板发微信</button>
       </div>
       <div class="btns">
-        <button class="primary" id="copyBtn">复制请帖文案</button>
         <a class="link-btn ghost" href="tel:18620075993">联系男方</a>
-      </div>
-      <div class="btns">
         <a class="link-btn ghost" href="tel:18688487138">联系女方</a>
-        <a class="link-btn ghost" href="https://uri.amap.com/search?keyword=%E6%B9%96%E5%8D%97%E7%9C%81%E7%9B%8A%E9%98%B3%E5%B8%82%E8%B5%AB%E5%B1%B1%E5%8C%BA%E9%AB%98%E6%96%B0%E5%8C%BA%E6%A2%93%E5%B1%B1%E8%B7%AF2%E5%8F%B7" target="_blank" rel="noopener">打开导航</a>
       </div>
       <p class="note">
         若你不方便直接填写在线回执，可先点“复制回执模板发微信”，把填写内容直接发给新人。<br>
@@ -560,7 +557,6 @@
     const hEl = document.getElementById("h");
     const mEl = document.getElementById("m");
     const sEl = document.getElementById("s");
-    const copyBtn = document.getElementById("copyBtn");
     const copyRsvpBtn = document.getElementById("copyRsvpBtn");
     const musicBtn = document.getElementById("musicBtn");
     const openBtn = document.getElementById("openBtn");
@@ -611,19 +607,6 @@
       petal.style.opacity = String(0.3 + Math.random() * 0.55);
       document.body.appendChild(petal);
       setTimeout(() => petal.remove(), 13000);
-    }
-
-    async function copyInviteText() {
-      const text = "我们将于2026年9月19日18:00在湖南省益阳市赫山区高新区梓山路2号举行婚礼，诚邀您和家人出席见证幸福时刻！";
-      try {
-        await navigator.clipboard.writeText(text);
-        copyBtn.textContent = "已复制，去微信粘贴";
-      } catch (err) {
-        copyBtn.textContent = "复制失败，请手动复制";
-      }
-      setTimeout(() => {
-        copyBtn.textContent = "复制请帖文案";
-      }, 1600);
     }
 
     async function copyRsvpText() {
@@ -766,7 +749,6 @@
     }
 
     musicBtn.addEventListener("click", toggleMusic);
-    copyBtn.addEventListener("click", copyInviteText);
     copyRsvpBtn.addEventListener("click", copyRsvpText);
 
     openBtn.addEventListener("click", async () => {
