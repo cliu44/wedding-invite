@@ -10,15 +10,15 @@
   <meta property="og:type" content="website">
   <style>
     :root {
-      --bg: #fff7fb;
-      --card: rgba(255, 255, 255, 0.86);
-      --text: #5f3a47;
-      --muted: #9f7785;
-      --accent: #c93f68;
-      --accent-dark: #8f2d50;
-      --accent-soft: #ffe4ee;
-      --line: #f4d4e2;
-      --gold: #f5d38a;
+      --bg: #1f1522;
+      --card: rgba(38, 26, 42, 0.84);
+      --text: #f8e9ef;
+      --muted: #d8bac6;
+      --accent: #ea4f81;
+      --accent-dark: #b93a63;
+      --accent-soft: #3a2232;
+      --line: #5d3a4d;
+      --gold: #f7d18d;
     }
 
     * { box-sizing: border-box; }
@@ -28,9 +28,9 @@
       font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(circle at 15% 10%, rgba(255, 225, 237, 0.8) 0, transparent 40%),
-        radial-gradient(circle at 85% 20%, rgba(255, 234, 242, 0.75) 0, transparent 38%),
-        linear-gradient(180deg, #fff0f6 0%, var(--bg) 46%, #fff 100%);
+        radial-gradient(circle at 15% 10%, rgba(255, 195, 216, 0.2) 0, transparent 38%),
+        radial-gradient(circle at 85% 20%, rgba(255, 220, 160, 0.16) 0, transparent 42%),
+        linear-gradient(180deg, #2b1a31 0%, var(--bg) 45%, #120c15 100%);
       overflow-x: hidden;
     }
 
@@ -42,7 +42,7 @@
       position: fixed;
       inset: 0;
       z-index: 20;
-      background: radial-gradient(circle at 50% 20%, #ffe5ec 0%, #f9d7e1 45%, #efc0ce 100%);
+      background: radial-gradient(circle at 50% 20%, #4a2c3e 0%, #2f1c2f 45%, #160f1b 100%);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -60,23 +60,23 @@
       max-width: 460px;
       width: 100%;
       text-align: center;
-      background: rgba(255, 255, 255, 0.8);
-      border: 1px solid #f4c7d3;
+      background: rgba(53, 33, 51, 0.78);
+      border: 1px solid #7b4e67;
       border-radius: 18px;
       padding: 24px 18px;
-      box-shadow: 0 12px 34px rgba(160, 70, 96, 0.22);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.38);
     }
 
     .opening-title {
       font-size: 30px;
-      color: #8f3345;
+      color: #ffd99f;
       margin: 0;
       letter-spacing: 2px;
     }
 
     .opening-sub {
       margin: 10px 0 0;
-      color: #9a5967;
+      color: #e3c7d2;
       line-height: 1.7;
       font-size: 14px;
     }
@@ -119,22 +119,22 @@
 
     .hero {
       background:
-        radial-gradient(circle at 15% 0%, rgba(255, 255, 255, 0.8), transparent 35%),
-        linear-gradient(140deg, #ffdbe8 0%, #ffcfe0 45%, #fbc7da 100%);
+        radial-gradient(circle at 20% 0%, rgba(255, 220, 170, 0.24), transparent 35%),
+        linear-gradient(140deg, #4c2c45 0%, #392336 45%, #2e1b2b 100%);
       border-radius: 22px;
       padding: 26px 16px 22px;
       text-align: center;
-      box-shadow: 0 14px 34px rgba(196, 62, 104, 0.24);
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.34);
       position: relative;
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(241, 196, 147, 0.28);
     }
 
     .tag {
       display: inline-block;
-      background: rgba(255, 255, 255, 0.75);
-      color: var(--accent);
-      border: 1px solid #ffd4df;
+      background: rgba(247, 209, 141, 0.16);
+      color: #ffd99f;
+      border: 1px solid rgba(247, 209, 141, 0.4);
       border-radius: 999px;
       padding: 4px 11px;
       font-size: 12px;
@@ -146,26 +146,26 @@
       margin: 14px 0 6px;
       font-size: 31px;
       line-height: 1.25;
-      color: #8f3345;
+      color: #ffe9f0;
     }
 
     .subtitle {
       margin: 0;
-      color: #92545d;
+      color: #e1c3d1;
       font-size: 14px;
     }
 
     .music-btn {
       margin-top: 14px;
-      border: 1px solid #efafc3;
-      background: linear-gradient(180deg, #fff, #fff8fb);
-      color: #9f3f5a;
+      border: 1px solid rgba(247, 209, 141, 0.48);
+      background: linear-gradient(180deg, #5a394b, #422739);
+      color: #ffe0ad;
       border-radius: 999px;
       padding: 7px 14px;
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
-      box-shadow: 0 5px 14px rgba(196, 62, 104, 0.14);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.26);
     }
 
     .hero::before,
@@ -184,11 +184,11 @@
       margin-top: 12px;
       border-radius: 16px;
       overflow: hidden;
-      border: 1px solid #f1ccda;
+      border: 1px solid #6a4458;
       position: relative;
       aspect-ratio: 16 / 9;
       background: #fbe8ed;
-      box-shadow: 0 10px 24px rgba(130, 72, 99, 0.14);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.28);
     }
 
     .slides {
@@ -242,13 +242,13 @@
       border: 1px solid var(--line);
       border-radius: 16px;
       padding: 14px;
-      box-shadow: 0 8px 22px rgba(124, 70, 95, 0.1);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.26);
     }
 
     .title {
       margin: 0 0 10px;
       font-size: 17px;
-      color: #913454;
+      color: #ffd9a4;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -271,14 +271,14 @@
 
     .cell {
       border: 1px dashed var(--line);
-      background: #fffafb;
+      background: rgba(53, 33, 51, 0.52);
       border-radius: 12px;
       padding: 10px;
     }
 
     .k {
       font-size: 12px;
-      color: var(--muted);
+      color: #caa8b7;
       margin-bottom: 4px;
     }
 
@@ -286,7 +286,7 @@
       font-size: 15px;
       line-height: 1.45;
       font-weight: 600;
-      color: #704248;
+      color: #f7e9ef;
     }
 
     .address-row {
@@ -319,32 +319,32 @@
     .count-item {
       flex: 1;
       text-align: center;
-      background: linear-gradient(180deg, #ffecf3, #ffe4ee);
-      border: 1px solid #f8cad9;
+      background: linear-gradient(180deg, #492d3e, #3a2432);
+      border: 1px solid #6a4458;
       border-radius: 10px;
       padding: 9px 6px;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+      box-shadow: inset 0 0 0 1px rgba(255, 219, 164, 0.18);
     }
 
     .count-item .n {
       font-size: 21px;
       font-weight: 800;
-      color: var(--accent);
+      color: #ffd99f;
       line-height: 1;
     }
 
     .count-item .t {
       margin-top: 3px;
       font-size: 11px;
-      color: #a95f70;
+      color: #e0b9c8;
     }
 
     .quote {
-      background: linear-gradient(180deg, #fff8fb, #fff2f7);
-      border: 1px dashed #efbfd0;
+      background: linear-gradient(180deg, rgba(73, 45, 62, 0.45), rgba(53, 33, 51, 0.45));
+      border: 1px dashed #7a5364;
       border-radius: 12px;
       padding: 12px;
-      color: #7e575d;
+      color: #f0dce5;
       line-height: 1.7;
       font-size: 14px;
     }
@@ -362,7 +362,7 @@
     }
 
     .time {
-      color: var(--accent);
+      color: #ffd99f;
       font-weight: 700;
       font-size: 14px;
     }
@@ -370,7 +370,7 @@
     .event {
       border-left: 2px solid #ffd1dc;
       padding-left: 10px;
-      color: #735255;
+      color: #f0dce5;
     }
 
     .btns {
@@ -402,9 +402,9 @@
     }
 
     .ghost {
-      background: linear-gradient(180deg, #fff, #fff8fb);
-      border: 1px solid #f1bfd0;
-      color: #a44862;
+      background: linear-gradient(180deg, #4a2c40, #3b2435);
+      border: 1px solid #7b4e67;
+      color: #ffd7a0;
     }
 
     .danger {
@@ -436,7 +436,7 @@
     .note {
       margin-top: 8px;
       font-size: 12px;
-      color: var(--muted);
+      color: #d4b3c1;
       line-height: 1.5;
     }
 
@@ -450,7 +450,7 @@
     .tips-list {
       margin: 0;
       padding-left: 18px;
-      color: #735255;
+      color: #f0dce5;
       line-height: 1.7;
       font-size: 14px;
     }
@@ -458,7 +458,7 @@
     .footer {
       text-align: center;
       margin-top: 14px;
-      color: #b0888d;
+      color: #cfa8b8;
       font-size: 12px;
     }
 
