@@ -280,6 +280,25 @@
       color: #704248;
     }
 
+    .address-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .address-row .v {
+      flex: 1;
+    }
+
+    .inline-nav-btn {
+      display: inline-block;
+      padding: 8px 12px;
+      font-size: 12px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
     .countdown {
       display: flex;
       gap: 8px;
@@ -486,8 +505,10 @@
         </div>
         <div class="cell">
           <div class="k">详细地址</div>
-          <div class="v">薇斯汀主题宴会酒店繁花厅</div>
-          <a class="link-btn ghost" style="margin-top:8px;display:inline-block;padding:8px 12px;font-size:12px;" href="https://uri.amap.com/search?keyword=%E6%B9%96%E5%8D%97%E7%9C%81%E7%9B%8A%E9%98%B3%E5%B8%82%E8%B5%AB%E5%B1%B1%E5%8C%BA%E9%AB%98%E6%96%B0%E5%8C%BA%E6%A2%93%E5%B1%B1%E8%B7%AF2%E5%8F%B7" target="_blank" rel="noopener">打开导航</a>
+          <div class="address-row">
+            <div class="v">薇斯汀主题宴会酒店繁花厅</div>
+            <a class="link-btn ghost inline-nav-btn" href="https://uri.amap.com/search?keyword=%E6%B9%96%E5%8D%97%E7%9C%81%E7%9B%8A%E9%98%B3%E5%B8%82%E8%B5%AB%E5%B1%B1%E5%8C%BA%E9%AB%98%E6%96%B0%E5%8C%BA%E6%A2%93%E5%B1%B1%E8%B7%AF2%E5%8F%B7" target="_blank" rel="noopener">打开导航</a>
+          </div>
         </div>
       </div>
 
