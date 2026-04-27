@@ -278,6 +278,10 @@
       color: #fff;
     }
 
+    .primary.link-btn {
+      display: inline-block;
+    }
+
     .ghost {
       background: #fff;
       border: 1px solid #f3bcc8;
@@ -405,7 +409,10 @@
 
     <section class="card">
       <h2 class="title">到场回复</h2>
-      <p style="margin:0;color:#79575c;">若您方便出席，欢迎提前告知我们，以便安排座位。</p>
+      <p style="margin:0;color:#79575c;">若您方便出席，欢迎填写到场人数回执，方便我们安排座位与接待。</p>
+      <div class="btns">
+        <a class="primary link-btn" id="rsvpFormBtn" href="https://forms.gle/REPLACE_WITH_YOUR_FORM_LINK" target="_blank" rel="noopener">填写出席人数回执</a>
+      </div>
       <div class="btns">
         <button class="primary" id="copyBtn">复制请帖文案</button>
         <a class="link-btn ghost" href="tel:18620075993">联系男方</a>
@@ -415,8 +422,8 @@
         <a class="link-btn ghost" href="https://uri.amap.com/search?keyword=%E6%B9%96%E5%8D%97%E7%9C%81%E7%9B%8A%E9%98%B3%E5%B8%82%E8%B5%AB%E5%B1%B1%E5%8C%BA%E9%AB%98%E6%96%B0%E5%8C%BA%E6%A2%93%E5%B1%B1%E8%B7%AF2%E5%8F%B7" target="_blank" rel="noopener">打开导航</a>
       </div>
       <p class="note">
-        微信转发提示：将本页面部署到可访问链接（如 GitHub Pages / Vercel）后，把链接发到微信即可打开。<br>
-        若要显示微信分享标题和封面，后续可加公众号 JSSDK 或第三方分享配置。
+        回执数据说明：点击“填写出席人数回执”后，数据会进入你的问卷后台（如 Google 表单响应页）。<br>
+        当前链接为占位示例，我可以在你给出真实表单链接后帮你一键替换并发布。
       </p>
     </section>
 
