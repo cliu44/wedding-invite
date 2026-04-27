@@ -54,6 +54,36 @@
       transition: opacity .7s ease, visibility .7s ease;
     }
 
+    /* 封面层：低调漂浮爪印（不抢主视觉） */
+    .opening-cat-deco {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .opening-cat-paw {
+      position: absolute;
+      font-size: clamp(22px, 5.5vw, 36px);
+      opacity: 0.11;
+      user-select: none;
+      line-height: 1;
+    }
+
+    .opening-cat-paw.p1 { top: 14%; left: 6%; transform: rotate(-16deg); }
+    .opening-cat-paw.p2 { top: 20%; right: 7%; transform: rotate(14deg); }
+    .opening-cat-paw.p3 { bottom: 24%; left: 9%; transform: rotate(10deg); }
+    .opening-cat-paw.p4 { bottom: 16%; right: 6%; transform: rotate(-12deg); }
+
+    .opening-card-paws {
+      margin: 6px 0 2px;
+      font-size: 13px;
+      letter-spacing: 0.35em;
+      opacity: 0.22;
+      color: #f5c6d8;
+      user-select: none;
+    }
+
     .opening.hide {
       opacity: 0;
       visibility: hidden;
@@ -61,6 +91,8 @@
     }
 
     .opening-card {
+      position: relative;
+      z-index: 1;
       max-width: 460px;
       width: 100%;
       text-align: center;
@@ -567,8 +599,15 @@
 </head>
 <body class="locked">
   <div class="opening" id="opening">
+    <div class="opening-cat-deco" aria-hidden="true">
+      <span class="opening-cat-paw p1">🐾</span>
+      <span class="opening-cat-paw p2">🐾</span>
+      <span class="opening-cat-paw p3">🐾</span>
+      <span class="opening-cat-paw p4">🐾</span>
+    </div>
     <div class="opening-card">
       <p class="tag">INVITATION</p>
+      <div class="opening-card-paws" aria-hidden="true">🐾 · · · 🐾</div>
       <h2 class="opening-title">囍</h2>
       <p class="opening-sub">谨以此笺，诚邀您拨冗赴宴<br>共同见证我们人生中最重要的时刻</p>
       <button class="open-btn" id="openBtn">开启婚礼请帖</button>
