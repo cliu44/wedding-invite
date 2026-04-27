@@ -27,15 +27,19 @@
       margin: 0;
       font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
       color: var(--text);
-      background:
-        radial-gradient(circle at 15% 10%, rgba(255, 225, 237, 0.8) 0, transparent 40%),
-        radial-gradient(circle at 85% 20%, rgba(255, 234, 242, 0.75) 0, transparent 38%),
-        linear-gradient(180deg, #fff0f6 0%, var(--bg) 46%, #fff 100%);
+      background: radial-gradient(circle at 50% 20%, #4a2c3e 0%, #2f1c2f 45%, #160f1b 100%);
       overflow-x: hidden;
     }
 
     body.locked {
       overflow: hidden;
+    }
+
+    body.opened-theme {
+      background:
+        radial-gradient(circle at 15% 10%, rgba(255, 225, 237, 0.8) 0, transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(255, 234, 242, 0.75) 0, transparent 38%),
+        linear-gradient(180deg, #fff0f6 0%, var(--bg) 46%, #fff 100%);
     }
 
     .opening {
@@ -811,6 +815,7 @@
       }
       opening.classList.add("hide");
       document.body.classList.remove("locked");
+      document.body.classList.add("opened-theme");
       mainWrap.classList.remove("hidden");
       mainWrap.classList.add("reveal");
     });
