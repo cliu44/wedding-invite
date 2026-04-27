@@ -604,8 +604,11 @@
       const petal = document.createElement("div");
       petal.className = "petal";
       petal.style.left = Math.random() * 100 + "vw";
-      petal.style.animationDuration = 6 + Math.random() * 6 + "s";
-      petal.style.opacity = String(0.25 + Math.random() * 0.45);
+      const scale = 0.75 + Math.random() * 1.45;
+      petal.style.width = `${12 * scale}px`;
+      petal.style.height = `${8.5 * scale}px`;
+      petal.style.animationDuration = 4.4 + Math.random() * 5.4 + "s";
+      petal.style.opacity = String(0.3 + Math.random() * 0.55);
       document.body.appendChild(petal);
       setTimeout(() => petal.remove(), 13000);
     }
@@ -785,7 +788,7 @@
     renderCountdown();
     setInterval(renderCountdown, 1000);
     setInterval(nextSlide, 4200);
-    setInterval(createPetal, 900);
+    setInterval(createPetal, 350);
   </script>
 </body>
 </html>
