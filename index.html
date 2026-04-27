@@ -529,22 +529,84 @@
       }, 1800);
     }
 
-    const audio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_9f7f9c52ec.mp3?filename=wedding-piano-110624.mp3");
-    audio.loop = true;
-    audio.volume = 0.4;
     let musicOn = false;
+    let audioCtx = null;
+    let musicTimer = null;
+
+    function ensureAudioContext() {
+      if (!audioCtx) {
+        const Ctx = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new Ctx();
+      }
+      return audioCtx;
+    }
+
+    function playNote(ctx, freq, startAt, duration, volume) {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0.0001, startAt);
+      gain.gain.exponentialRampToValueAtTime(volume, startAt + 0.03);
+      gain.gain.exponentialRampToValueAtTime(0.0001, startAt + duration);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(startAt);
+      osc.stop(startAt + duration + 0.02);
+    }
+
+    function scheduleBgm(ctx, fromTime) {
+      // 简单温和的和弦循环（C-G-Am-F）
+      const chords = [
+        [261.63, 329.63, 392.0],
+        [196.0, 246.94, 392.0],
+        [220.0, 261.63, 329.63],
+        [174.61, 220.0, 349.23]
+      ];
+      const beat = 0.62;
+      let t = fromTime;
+      for (let i = 0; i < chords.length; i++) {
+        const chord = chords[i];
+        playNote(ctx, chord[0], t, beat * 0.95, 0.035);
+        playNote(ctx, chord[1], t + 0.08, beat * 0.9, 0.03);
+        playNote(ctx, chord[2], t + 0.16, beat * 0.85, 0.025);
+        t += beat;
+      }
+      return t;
+    }
+
+    function startBgm() {
+      const ctx = ensureAudioContext();
+      let nextAt = ctx.currentTime + 0.05;
+      scheduleBgm(ctx, nextAt);
+      musicTimer = setInterval(() => {
+        const lead = ctx.currentTime + 0.25;
+        nextAt = scheduleBgm(ctx, lead);
+      }, 2200);
+    }
+
+    function stopBgm() {
+      if (musicTimer) {
+        clearInterval(musicTimer);
+        musicTimer = null;
+      }
+      if (audioCtx && audioCtx.state !== "closed") {
+        audioCtx.close();
+        audioCtx = null;
+      }
+    }
 
     async function toggleMusic() {
       if (!musicOn) {
         try {
-          await audio.play();
+          startBgm();
           musicOn = true;
           musicBtn.textContent = "关闭背景音乐";
         } catch (e) {
-          musicBtn.textContent = "点击后再试";
+          musicBtn.textContent = "音乐启动失败";
         }
       } else {
-        audio.pause();
+        stopBgm();
         musicOn = false;
         musicBtn.textContent = "开启背景音乐";
       }
