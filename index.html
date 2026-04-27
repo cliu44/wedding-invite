@@ -411,7 +411,10 @@
       <h2 class="title">到场回复</h2>
       <p style="margin:0;color:#79575c;">若您方便出席，欢迎填写到场人数回执，方便我们安排座位与接待。</p>
       <div class="btns">
-        <a class="primary link-btn" id="rsvpFormBtn" href="https://docs.google.com/forms/d/e/1FAIpQLScyckGHs_TymamSk_Ihg4h15dZAlyNkU2qcIuBN7MXVzc75iQ/viewform?usp=publish-editor" target="_blank" rel="noopener">填写出席人数回执</a>
+        <button class="primary" id="copyRsvpBtn">复制回执模板发微信</button>
+      </div>
+      <div class="btns">
+        <a class="link-btn ghost" id="rsvpFormBtn" href="https://docs.google.com/forms/d/e/1FAIpQLScyckGHs_TymamSk_Ihg4h15dZAlyNkU2qcIuBN7MXVzc75iQ/viewform?usp=publish-editor" target="_blank" rel="noopener">Google 表单（备用）</a>
       </div>
       <div class="btns">
         <button class="primary" id="copyBtn">复制请帖文案</button>
@@ -422,8 +425,8 @@
         <a class="link-btn ghost" href="https://uri.amap.com/search?keyword=%E6%B9%96%E5%8D%97%E7%9C%81%E7%9B%8A%E9%98%B3%E5%B8%82%E8%B5%AB%E5%B1%B1%E5%8C%BA%E9%AB%98%E6%96%B0%E5%8C%BA%E6%A2%93%E5%B1%B1%E8%B7%AF2%E5%8F%B7" target="_blank" rel="noopener">打开导航</a>
       </div>
       <p class="note">
-        回执数据说明：点击“填写出席人数回执”后，数据会进入你的问卷后台（如 Google 表单响应页）。<br>
-        当前链接为占位示例，我可以在你给出真实表单链接后帮你一键替换并发布。
+        大陆微信用户若无法打开 Google 表单，可先点“复制回执模板发微信”，直接把填写内容发给新人。<br>
+        若你有腾讯问卷/金数据链接，我可以再帮你替换成国内可直开的在线回执。
       </p>
     </section>
 
@@ -447,6 +450,7 @@
     const mEl = document.getElementById("m");
     const sEl = document.getElementById("s");
     const copyBtn = document.getElementById("copyBtn");
+    const copyRsvpBtn = document.getElementById("copyRsvpBtn");
     const musicBtn = document.getElementById("musicBtn");
     const slides = Array.from(document.querySelectorAll(".slide"));
     const dots = Array.from(document.querySelectorAll(".dot"));
@@ -505,6 +509,26 @@
       }, 1600);
     }
 
+    async function copyRsvpText() {
+      const text = [
+        "婚礼回执",
+        "姓名：",
+        "是否出席：出席 / 不确定 / 无法出席",
+        "出席人数：",
+        "联系电话：",
+        "祝福留言："
+      ].join("\n");
+      try {
+        await navigator.clipboard.writeText(text);
+        copyRsvpBtn.textContent = "已复制，去微信粘贴发送";
+      } catch (err) {
+        copyRsvpBtn.textContent = "复制失败，请手动填写";
+      }
+      setTimeout(() => {
+        copyRsvpBtn.textContent = "复制回执模板发微信";
+      }, 1800);
+    }
+
     const audio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_9f7f9c52ec.mp3?filename=wedding-piano-110624.mp3");
     audio.loop = true;
     audio.volume = 0.4;
@@ -528,6 +552,7 @@
 
     musicBtn.addEventListener("click", toggleMusic);
     copyBtn.addEventListener("click", copyInviteText);
+    copyRsvpBtn.addEventListener("click", copyRsvpText);
 
     renderCountdown();
     setInterval(renderCountdown, 1000);
