@@ -260,9 +260,21 @@
       text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
     }
 
+    /* 默认：标题两侧为最初的渐变细线（浪漫分割线） */
     .title::before,
     .title::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, #e9b6c4, transparent);
+    }
+
+    /* 仅「我们的故事」一栏保留猫爪小设计（与下方毛孩子区块呼应） */
+    .title.title-with-paws::before,
+    .title.title-with-paws::after {
       content: "🐾 · 🐾 · 🐾";
+      height: auto;
+      background: none;
       flex: 1;
       font-size: 13px;
       line-height: 1.2;
@@ -274,12 +286,12 @@
       text-overflow: clip;
     }
 
-    .title::before {
+    .title.title-with-paws::before {
       text-align: right;
       padding-right: 2px;
     }
 
-    .title::after {
+    .title.title-with-paws::after {
       text-align: left;
       padding-left: 2px;
     }
@@ -624,7 +636,7 @@
     </section>
 
     <section class="card">
-      <h2 class="title">我们的故事</h2>
+      <h2 class="title title-with-paws">我们的故事</h2>
       <div class="quote">
         从相识、相知到相爱，我们一起走过了许多平凡却珍贵的日子。<br>
         这一次，我们想把这份幸福分享给你，期待你来见证我们人生中最重要的时刻。
