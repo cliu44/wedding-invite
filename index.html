@@ -46,26 +46,31 @@
       position: fixed;
       inset: 0;
       z-index: 20;
+      /* 背景单独一层，避免把爪印压在不可见层级 */
       background: radial-gradient(circle at 50% 20%, #4a2c3e 0%, #2f1c2f 45%, #160f1b 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 20px;
       transition: opacity .7s ease, visibility .7s ease;
+      isolation: isolate;
     }
 
-    /* 封面层：低调漂浮爪印（不抢主视觉） */
+    /* 封面层：漂浮爪印（在背景之上、卡片之下） */
     .opening-cat-deco {
       position: absolute;
       inset: 0;
       pointer-events: none;
-      z-index: 0;
+      z-index: 1;
     }
 
     .opening-cat-paw {
       position: absolute;
-      font-size: clamp(22px, 5.5vw, 36px);
-      opacity: 0.11;
+      font-size: clamp(26px, 7vw, 44px);
+      opacity: 0.32;
+      color: rgba(255, 210, 225, 0.95);
+      text-shadow: 0 0 18px rgba(255, 160, 190, 0.55);
+      filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.35));
       user-select: none;
       line-height: 1;
     }
@@ -77,11 +82,27 @@
 
     .opening-card-paws {
       margin: 6px 0 2px;
-      font-size: 13px;
+      font-size: 14px;
       letter-spacing: 0.35em;
-      opacity: 0.22;
-      color: #f5c6d8;
+      opacity: 0.55;
+      color: #ffd6e5;
+      text-shadow: 0 0 10px rgba(255, 140, 170, 0.35);
       user-select: none;
+    }
+
+    .opening-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 4px;
+    }
+
+    .opening-flank-paw {
+      font-size: clamp(22px, 6vw, 30px);
+      opacity: 0.5;
+      line-height: 1;
+      filter: drop-shadow(0 0 8px rgba(255, 180, 200, 0.45));
     }
 
     .opening.hide {
@@ -92,7 +113,7 @@
 
     .opening-card {
       position: relative;
-      z-index: 1;
+      z-index: 2;
       max-width: 460px;
       width: 100%;
       text-align: center;
@@ -608,7 +629,11 @@
     <div class="opening-card">
       <p class="tag">INVITATION</p>
       <div class="opening-card-paws" aria-hidden="true">🐾 · · · 🐾</div>
-      <h2 class="opening-title">囍</h2>
+      <div class="opening-title-row">
+        <span class="opening-flank-paw" aria-hidden="true">🐾</span>
+        <h2 class="opening-title">囍</h2>
+        <span class="opening-flank-paw" aria-hidden="true">🐾</span>
+      </div>
       <p class="opening-sub">谨以此笺，诚邀您拨冗赴宴<br>共同见证我们人生中最重要的时刻</p>
       <button class="open-btn" id="openBtn">开启婚礼请帖</button>
     </div>
