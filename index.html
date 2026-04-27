@@ -257,14 +257,22 @@
       align-items: center;
       gap: 10px;
       letter-spacing: 0.5px;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6);
     }
 
     .title::before,
     .title::after {
       content: "";
-      height: 1px;
+      height: 10px;
       flex: 1;
-      background: linear-gradient(90deg, transparent, #e9b6c4, transparent);
+      margin-top: 1px;
+      border-top: 1px solid rgba(218, 147, 166, 0.7);
+      border-bottom: 1px solid rgba(255, 222, 185, 0.45);
+      background:
+        radial-gradient(circle, rgba(245, 211, 138, 0.95) 0 1.5px, transparent 1.6px) left center / 12px 10px no-repeat,
+        radial-gradient(circle, rgba(245, 211, 138, 0.95) 0 1.5px, transparent 1.6px) right center / 12px 10px no-repeat,
+        linear-gradient(90deg, transparent, rgba(231, 160, 182, 0.85) 20%, rgba(245, 211, 138, 0.7) 50%, rgba(231, 160, 182, 0.85) 80%, transparent);
+      border-radius: 999px;
     }
 
     .grid2 {
