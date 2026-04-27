@@ -290,24 +290,33 @@
     .slide.no-crop {
       position: relative;
       isolation: isolate;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-color: rgba(35, 20, 28, 0.45);
+      background: none;
     }
 
-    /* 无裁切图的柔焦补边：用同图模糊铺底，减少留白突兀感 */
+    /* 无裁切图：两侧模糊补边 + 中间完整原图 */
     .slide.no-crop::before {
       content: "";
       position: absolute;
-      inset: -7%;
-      background-image: inherit;
+      inset: 0;
+      background-image: var(--slide-url);
       background-size: cover;
       background-position: center;
-      filter: blur(16px) saturate(0.9);
-      opacity: 0.52;
+      filter: blur(18px) saturate(0.95);
+      opacity: 0.62;
+      z-index: -2;
+      transform: scale(1.08);
+      pointer-events: none;
+    }
+
+    .slide.no-crop::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: var(--slide-url);
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center center;
       z-index: -1;
-      transform: scale(1.06);
       pointer-events: none;
     }
 
@@ -689,7 +698,7 @@
     <section class="slider" aria-label="婚纱照轮播">
       <div class="slides" id="slides">
         <div class="slide show focus-mid" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-1.jpg');">我们的婚礼之旅</div>
-        <div class="slide no-crop" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-2.jpg');">把喜欢写进每一天</div>
+        <div class="slide no-crop" style="--slide-url:url('./assets/slide-2.jpg');">把喜欢写进每一天</div>
         <div class="slide focus-mid" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-3.jpg');">你的出现让未来有了名字</div>
         <div class="slide" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-4.jpg');">在落日里许下承诺</div>
         <div class="slide" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-5.jpg');">这一刻，我们把爱说给世界听</div>
