@@ -31,11 +31,87 @@
       overflow-x: hidden;
     }
 
+    body.locked {
+      overflow: hidden;
+    }
+
+    .opening {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      background: radial-gradient(circle at 50% 20%, #ffe5ec 0%, #f9d7e1 45%, #efc0ce 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      transition: opacity .7s ease, visibility .7s ease;
+    }
+
+    .opening.hide {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .opening-card {
+      max-width: 460px;
+      width: 100%;
+      text-align: center;
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid #f4c7d3;
+      border-radius: 18px;
+      padding: 24px 18px;
+      box-shadow: 0 12px 34px rgba(160, 70, 96, 0.22);
+    }
+
+    .opening-title {
+      font-size: 30px;
+      color: #8f3345;
+      margin: 0;
+      letter-spacing: 2px;
+    }
+
+    .opening-sub {
+      margin: 10px 0 0;
+      color: #9a5967;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .open-btn {
+      margin-top: 16px;
+      border: none;
+      border-radius: 999px;
+      padding: 11px 22px;
+      background: linear-gradient(90deg, #cb4e62, #b73d51);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(177, 51, 76, 0.3);
+    }
+
     .wrap {
       max-width: 680px;
       margin: 0 auto;
       padding: 14px 14px 38px;
       position: relative;
+    }
+
+    .wrap.hidden {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+
+    .wrap.reveal {
+      animation: revealWrap .8s ease forwards;
+    }
+
+    @keyframes revealWrap {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .hero {
@@ -165,6 +241,17 @@
       margin: 0 0 10px;
       font-size: 17px;
       color: #8f3345;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .title::before,
+    .title::after {
+      content: "";
+      height: 1px;
+      flex: 1;
+      background: linear-gradient(90deg, transparent, #e9b6c4, transparent);
     }
 
     .grid2 {
@@ -338,8 +425,17 @@
     }
   </style>
 </head>
-<body>
-  <main class="wrap">
+<body class="locked">
+  <div class="opening" id="opening">
+    <div class="opening-card">
+      <p class="tag">INVITATION</p>
+      <h2 class="opening-title">囍</h2>
+      <p class="opening-sub">谨以此笺，诚邀您拨冗赴宴<br>共同见证我们人生中最重要的时刻</p>
+      <button class="open-btn" id="openBtn">开启婚礼请帖</button>
+    </div>
+  </div>
+
+  <main class="wrap hidden" id="mainWrap">
     <section class="hero">
       <span class="tag">WEDDING INVITATION</span>
       <h1>刘辰 ♥ 李秋思</h1>
@@ -394,6 +490,14 @@
       <div class="quote">
         从相识、相知到相爱，我们一起走过了许多平凡却珍贵的日子。<br>
         这一次，我们想把这份幸福分享给你，期待你来见证我们人生中最重要的时刻。
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="title">爱的誓言</h2>
+      <div class="quote">
+        我们愿在往后的岁月里，同甘共苦，彼此扶持。<br>
+        在亲友的见证下，许下一生相守的承诺。
       </div>
     </section>
 
@@ -453,6 +557,9 @@
     const copyBtn = document.getElementById("copyBtn");
     const copyRsvpBtn = document.getElementById("copyRsvpBtn");
     const musicBtn = document.getElementById("musicBtn");
+    const openBtn = document.getElementById("openBtn");
+    const opening = document.getElementById("opening");
+    const mainWrap = document.getElementById("mainWrap");
     const slides = Array.from(document.querySelectorAll(".slide"));
     const dots = Array.from(document.querySelectorAll(".dot"));
 
@@ -652,6 +759,22 @@
     musicBtn.addEventListener("click", toggleMusic);
     copyBtn.addEventListener("click", copyInviteText);
     copyRsvpBtn.addEventListener("click", copyRsvpText);
+
+    openBtn.addEventListener("click", async () => {
+      if (!musicOn) {
+        try {
+          await startBgm();
+          musicOn = true;
+          musicBtn.textContent = useLocalTrack ? "关闭背景音乐（歌曲）" : "关闭背景音乐（轻音乐）";
+        } catch (e) {
+          musicBtn.textContent = "开启背景音乐";
+        }
+      }
+      opening.classList.add("hide");
+      document.body.classList.remove("locked");
+      mainWrap.classList.remove("hidden");
+      mainWrap.classList.add("reveal");
+    });
 
     renderCountdown();
     setInterval(renderCountdown, 1000);
