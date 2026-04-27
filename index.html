@@ -529,7 +529,12 @@
       }, 1800);
     }
 
+    const localBgm = new Audio("./assets/bgm.mp3");
+    localBgm.loop = true;
+    localBgm.volume = 0.45;
+
     let musicOn = false;
+    let useLocalTrack = false;
     let audioCtx = null;
     let musicTimer = null;
 
@@ -585,7 +590,7 @@
       return t;
     }
 
-    function startBgm() {
+    function startSynthBgm() {
       const ctx = ensureAudioContext();
       let nextAt = ctx.currentTime + 0.05;
       scheduleBgm(ctx, nextAt);
@@ -595,7 +600,7 @@
       }, 13000);
     }
 
-    function stopBgm() {
+    function stopSynthBgm() {
       if (musicTimer) {
         clearInterval(musicTimer);
         musicTimer = null;
@@ -606,12 +611,33 @@
       }
     }
 
+    async function startBgm() {
+      // 优先使用本地音乐文件（assets/bgm.mp3），失败时回退到内置旋律
+      try {
+        localBgm.currentTime = 0;
+        await localBgm.play();
+        useLocalTrack = true;
+      } catch (err) {
+        useLocalTrack = false;
+        startSynthBgm();
+      }
+    }
+
+    function stopBgm() {
+      if (useLocalTrack) {
+        localBgm.pause();
+        localBgm.currentTime = 0;
+      } else {
+        stopSynthBgm();
+      }
+    }
+
     async function toggleMusic() {
       if (!musicOn) {
         try {
-          startBgm();
+          await startBgm();
           musicOn = true;
-          musicBtn.textContent = "关闭背景音乐";
+          musicBtn.textContent = useLocalTrack ? "关闭背景音乐（歌曲）" : "关闭背景音乐（轻音乐）";
         } catch (e) {
           musicBtn.textContent = "音乐启动失败";
         }
