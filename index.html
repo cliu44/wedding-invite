@@ -10,15 +10,15 @@
   <meta property="og:type" content="website">
   <style>
     :root {
-      --bg: #fff8f8;
-      --card: #ffffff;
-      --text: #5b3f42;
-      --muted: #997b7e;
-      --accent: #c5475b;
-      --accent-dark: #963548;
-      --accent-soft: #ffe7ec;
-      --line: #f3d5dc;
-      --gold: #f7d68b;
+      --bg: #fff7fb;
+      --card: rgba(255, 255, 255, 0.86);
+      --text: #5f3a47;
+      --muted: #9f7785;
+      --accent: #c93f68;
+      --accent-dark: #8f2d50;
+      --accent-soft: #ffe4ee;
+      --line: #f4d4e2;
+      --gold: #f5d38a;
     }
 
     * { box-sizing: border-box; }
@@ -27,7 +27,10 @@
       margin: 0;
       font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
       color: var(--text);
-      background: linear-gradient(180deg, #ffeef2 0%, var(--bg) 44%, #fff 100%);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(255, 225, 237, 0.8) 0, transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(255, 234, 242, 0.75) 0, transparent 38%),
+        linear-gradient(180deg, #fff0f6 0%, var(--bg) 46%, #fff 100%);
       overflow-x: hidden;
     }
 
@@ -115,13 +118,16 @@
     }
 
     .hero {
-      background: radial-gradient(circle at top, #ffe8ee, #ffdbe6 55%, #ffd2df);
+      background:
+        radial-gradient(circle at 15% 0%, rgba(255, 255, 255, 0.8), transparent 35%),
+        linear-gradient(140deg, #ffdbe8 0%, #ffcfe0 45%, #fbc7da 100%);
       border-radius: 22px;
       padding: 26px 16px 22px;
       text-align: center;
-      box-shadow: 0 10px 28px rgba(197, 71, 91, 0.2);
+      box-shadow: 0 14px 34px rgba(196, 62, 104, 0.24);
       position: relative;
       overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.75);
     }
 
     .tag {
@@ -151,14 +157,15 @@
 
     .music-btn {
       margin-top: 14px;
-      border: 1px solid #f2b9c7;
-      background: #fff;
-      color: #a14858;
+      border: 1px solid #efafc3;
+      background: linear-gradient(180deg, #fff, #fff8fb);
+      color: #9f3f5a;
       border-radius: 999px;
       padding: 7px 14px;
       font-size: 13px;
       font-weight: 700;
       cursor: pointer;
+      box-shadow: 0 5px 14px rgba(196, 62, 104, 0.14);
     }
 
     .hero::before,
@@ -177,11 +184,11 @@
       margin-top: 12px;
       border-radius: 16px;
       overflow: hidden;
-      border: 1px solid var(--line);
+      border: 1px solid #f1ccda;
       position: relative;
       aspect-ratio: 16 / 9;
       background: #fbe8ed;
-      box-shadow: 0 4px 14px rgba(120, 72, 77, 0.08);
+      box-shadow: 0 10px 24px rgba(130, 72, 99, 0.14);
     }
 
     .slides {
@@ -231,19 +238,21 @@
     .card {
       margin-top: 12px;
       background: var(--card);
+      backdrop-filter: blur(6px);
       border: 1px solid var(--line);
       border-radius: 16px;
       padding: 14px;
-      box-shadow: 0 4px 14px rgba(120, 72, 77, 0.06);
+      box-shadow: 0 8px 22px rgba(124, 70, 95, 0.1);
     }
 
     .title {
       margin: 0 0 10px;
       font-size: 17px;
-      color: #8f3345;
+      color: #913454;
       display: flex;
       align-items: center;
       gap: 10px;
+      letter-spacing: 0.5px;
     }
 
     .title::before,
@@ -310,10 +319,11 @@
     .count-item {
       flex: 1;
       text-align: center;
-      background: var(--accent-soft);
-      border: 1px solid #ffd2de;
+      background: linear-gradient(180deg, #ffecf3, #ffe4ee);
+      border: 1px solid #f8cad9;
       border-radius: 10px;
       padding: 9px 6px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.4);
     }
 
     .count-item .n {
@@ -330,8 +340,8 @@
     }
 
     .quote {
-      background: #fff5f7;
-      border: 1px dashed #f0c2ce;
+      background: linear-gradient(180deg, #fff8fb, #fff2f7);
+      border: 1px dashed #efbfd0;
       border-radius: 12px;
       padding: 12px;
       color: #7e575d;
@@ -382,8 +392,9 @@
     }
 
     .primary {
-      background: var(--accent);
+      background: linear-gradient(135deg, #d54872, #b7355e);
       color: #fff;
+      box-shadow: 0 6px 14px rgba(184, 45, 88, 0.24);
     }
 
     .primary.link-btn {
@@ -391,15 +402,15 @@
     }
 
     .ghost {
-      background: #fff;
-      border: 1px solid #f3bcc8;
-      color: #a04b5b;
+      background: linear-gradient(180deg, #fff, #fff8fb);
+      border: 1px solid #f1bfd0;
+      color: #a44862;
     }
 
     .danger {
-      background: #d83b53;
+      background: linear-gradient(135deg, #df355f, #c62c54);
       color: #fff;
-      box-shadow: 0 4px 10px rgba(216, 59, 83, 0.26);
+      box-shadow: 0 6px 14px rgba(216, 59, 83, 0.3);
     }
 
     .petal {
