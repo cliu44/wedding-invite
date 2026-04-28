@@ -21,12 +21,33 @@
   <meta name="twitter:image" content="https://wedding-invite-8k3.pages.dev/assets/share-cover.jpg">
   <link rel="stylesheet" href="./assets/invite.css">
 </head>
-<body class="opened-theme">
-  <main class="wrap">
+<body class="locked">
+  <div class="opening" id="opening">
+    <div class="opening-cat-deco" aria-hidden="true">
+      <span class="opening-cat-paw p1">🐾</span>
+      <span class="opening-cat-paw p2">🐾</span>
+      <span class="opening-cat-paw p3">🐾</span>
+      <span class="opening-cat-paw p4">🐾</span>
+    </div>
+    <div class="opening-card">
+      <p class="tag">INVITATION</p>
+      <div class="opening-card-paws" aria-hidden="true">🐾 · · · 🐾</div>
+      <div class="opening-title-row">
+        <span class="opening-flank-paw" aria-hidden="true">🐾</span>
+        <h2 class="opening-title">囍</h2>
+        <span class="opening-flank-paw" aria-hidden="true">🐾</span>
+      </div>
+      <p class="opening-sub">谨以此笺，诚邀您拨冗赴宴<br>共同见证我们人生中最重要的时刻</p>
+      <button class="open-btn" id="openBtn">开启婚礼请帖</button>
+    </div>
+  </div>
+
+  <main class="wrap hidden" id="mainWrap">
     <section class="hero">
       <span class="tag">WEDDING INVITATION · 微信版</span>
       <h1>刘辰 ♥ 李秋思</h1>
       <p class="subtitle">谨定于 2026 年 09 月 19 日（农历八月初九）举行婚礼，敬备喜筵，恭候光临</p>
+      <button class="music-btn" id="musicBtn">开启背景音乐</button>
     </section>
 
     <section class="slider" aria-label="婚纱照轮播">
@@ -146,10 +167,18 @@
     const hEl = document.getElementById("h");
     const mEl = document.getElementById("m");
     const sEl = document.getElementById("s");
+    const musicBtn = document.getElementById("musicBtn");
+    const openBtn = document.getElementById("openBtn");
+    const opening = document.getElementById("opening");
+    const mainWrap = document.getElementById("mainWrap");
     const slides = Array.from(document.querySelectorAll(".slide"));
     const dots = Array.from(document.querySelectorAll(".dot"));
     const copyMapBtn = document.getElementById("copyMapBtn");
     const floatToast = document.getElementById("floatToast");
+    const localBgm = new Audio("./assets/bgm.mp3");
+    localBgm.loop = true;
+    localBgm.volume = 0.45;
+    let musicOn = false;
 
     function pad(num) {
       return String(num).padStart(2, "0");
@@ -223,6 +252,44 @@
     copyMapBtn.addEventListener("click", async function () {
       const copied = await copyText(MAP_TEXT);
       showToast(copied ? "已复制导航地址" : "复制失败，请长按手动复制");
+    });
+
+    async function toggleMusic() {
+      if (!musicOn) {
+        try {
+          localBgm.currentTime = 0;
+          await localBgm.play();
+          musicOn = true;
+          musicBtn.textContent = "关闭背景音乐（歌曲）";
+        } catch (err) {
+          musicBtn.textContent = "音乐启动失败";
+        }
+      } else {
+        localBgm.pause();
+        localBgm.currentTime = 0;
+        musicOn = false;
+        musicBtn.textContent = "开启背景音乐";
+      }
+    }
+
+    musicBtn.addEventListener("click", toggleMusic);
+
+    openBtn.addEventListener("click", async function () {
+      opening.classList.add("hide");
+      document.body.classList.remove("locked");
+      document.body.classList.add("opened-theme");
+      mainWrap.classList.remove("hidden");
+      mainWrap.classList.add("reveal");
+      if (!musicOn) {
+        try {
+          localBgm.currentTime = 0;
+          await localBgm.play();
+          musicOn = true;
+          musicBtn.textContent = "关闭背景音乐（歌曲）";
+        } catch (err) {
+          musicBtn.textContent = "开启背景音乐";
+        }
+      }
     });
 
     renderCountdown();
