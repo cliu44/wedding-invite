@@ -19,184 +19,216 @@
   <meta name="twitter:title" content="刘辰 & 李秋思 婚礼请帖">
   <meta name="twitter:description" content="2026年09月19日，诚邀您出席我们的婚礼。">
   <meta name="twitter:image" content="https://wedding-invite-8k3.pages.dev/assets/share-cover.jpg">
-  <style>
-    :root {
-      --bg: #fff7fb;
-      --text: #5f3a47;
-      --muted: #8f6772;
-      --accent: #c93f68;
-      --line: #f0ccda;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: linear-gradient(180deg, #fff3f8 0%, var(--bg) 48%, #fff 100%);
-      color: var(--text);
-      font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
-    }
-    .wrap {
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 14px;
-    }
-    .hero {
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      background: #fff;
-      padding: 16px;
-      box-shadow: 0 8px 22px rgba(124, 70, 95, 0.1);
-      text-align: center;
-    }
-    .hero h1 {
-      margin: 4px 0 10px;
-      font-size: 30px;
-      color: #8f3345;
-    }
-    .hero p {
-      margin: 0;
-      color: #855f68;
-      line-height: 1.7;
-      font-size: 14px;
-    }
-    .card {
-      margin-top: 12px;
-      border: 1px solid var(--line);
-      border-radius: 14px;
-      background: #fff;
-      padding: 14px;
-      box-shadow: 0 8px 22px rgba(124, 70, 95, 0.08);
-    }
-    .title {
-      margin: 0 0 10px;
-      font-size: 17px;
-      color: #913454;
-      font-weight: 700;
-    }
-    .line {
-      margin: 6px 0;
-      color: #6e4a54;
-      font-size: 14px;
-      line-height: 1.65;
-    }
-    .cover {
-      width: 100%;
-      border-radius: 12px;
-      border: 1px solid #f1ccda;
-      display: block;
-      height: auto;
-    }
-    .btns {
-      margin-top: 10px;
-      display: grid;
-      gap: 8px;
-      grid-template-columns: 1fr;
-    }
-    button, a.btn {
-      border: none;
-      border-radius: 10px;
-      padding: 11px 10px;
-      font-size: 14px;
-      font-weight: 700;
-      text-align: center;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .primary {
-      background: linear-gradient(135deg, #d54872, #b7355e);
-      color: #fff;
-    }
-    .ghost {
-      background: #fff;
-      border: 1px solid #f1bfd0;
-      color: #a44862;
-    }
-    .note {
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.6;
-    }
-    .footer {
-      margin-top: 12px;
-      text-align: center;
-      color: #af8792;
-      font-size: 12px;
-    }
-  </style>
+  <link rel="stylesheet" href="./assets/invite.css">
 </head>
-<body>
+<body class="opened-theme">
   <main class="wrap">
     <section class="hero">
-      <div style="display:inline-block;padding:3px 10px;border-radius:999px;border:1px solid #ffd4df;color:#c74667;font-size:12px;font-weight:700;">WEDDING INVITATION</div>
+      <span class="tag">WEDDING INVITATION · 微信版</span>
       <h1>刘辰 ♥ 李秋思</h1>
-      <p>谨定于 2026 年 09 月 19 日（农历八月初九）举行婚礼，敬备喜筵，恭候光临</p>
+      <p class="subtitle">谨定于 2026 年 09 月 19 日（农历八月初九）举行婚礼，敬备喜筵，恭候光临</p>
+    </section>
+
+    <section class="slider" aria-label="婚纱照轮播">
+      <div class="slides" id="slides">
+        <div class="slide show focus-mid" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-opening.jpg');">把喜欢写进每一天</div>
+        <div class="slide focus-mid" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-2.jpg');">你的出现让未来有了名字</div>
+        <div class="slide" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-3.jpg');">在落日里许下承诺</div>
+        <div class="slide" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-4.jpg');">这一刻，我们把爱说给世界听</div>
+        <div class="slide" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-5.jpg');">在同一片天空下，我们并肩向前</div>
+        <div class="slide focus-sunset-end" style="background-image:linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.4)), url('./assets/slide-6.jpg');">把落日和你，一起珍藏</div>
+      </div>
+      <div class="dots" id="dots">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
     </section>
 
     <section class="card">
       <h2 class="title">婚礼信息</h2>
-      <p class="line">时间：2026年09月19日（周六）18:00</p>
-      <p class="line">地点：湖南省益阳市赫山区高新区梓山路 2 号<br>薇斯汀主题宴会酒店繁花厅</p>
-      <div class="btns">
-        <button class="ghost" id="copyMapBtn">复制导航地址</button>
+      <div class="grid2">
+        <div class="cell">
+          <div class="k">婚礼日期</div>
+          <div class="v">2026年09月19日（周六）<span class="date-time-inline">18:00</span></div>
+        </div>
+        <div class="cell">
+          <div class="k">婚礼地点</div>
+          <div class="v venue-street">湖南省益阳市赫山区高新区梓山路 2 号</div>
+          <div class="address-row">
+            <div class="v">薇斯汀主题宴会酒店繁花厅</div>
+            <button class="ghost inline-nav-btn" id="copyMapBtn">复制导航地址</button>
+          </div>
+        </div>
       </div>
-      <p class="note">微信内为减少风控拦截，不直接跳转外部地图；复制后可在地图 App 打开。</p>
+      <div class="countdown" aria-label="婚礼倒计时">
+        <div class="count-item"><div class="n" id="d">0</div><div class="t">天</div></div>
+        <div class="count-item"><div class="n" id="h">0</div><div class="t">时</div></div>
+        <div class="count-item"><div class="n" id="m">0</div><div class="t">分</div></div>
+        <div class="count-item"><div class="n" id="s">0</div><div class="t">秒</div></div>
+      </div>
+      <p class="note">微信版为降低风控拦截，不提供在线回执收集，导航采用复制方式。</p>
     </section>
 
     <section class="card">
-      <h2 class="title">婚礼回执</h2>
-      <p class="line">若您方便出席，欢迎填写回执，便于我们安排座位与接待。</p>
-      <div class="btns">
-        <button class="primary" id="copyFormBtn">复制回执链接</button>
-        <button class="ghost" id="copyTemplateBtn">复制回执模板</button>
+      <h2 class="title">我们的故事</h2>
+      <div class="quote">
+        从相识、相知到相爱，我们一起走过了许多平凡却珍贵的日子。<br>
+        这一次，我们想把这份幸福分享给你，期待你来见证我们人生中最重要的时刻。
       </div>
-      <p class="note">微信专用页仅提供复制操作，避免外部跳转导致访问被拦。</p>
+      <div class="cat-nest">
+        <div class="cat-nest-badge" aria-hidden="true">🐾🐾🐾</div>
+        <h3>我们的毛孩子</h3>
+        <p class="cat-nest-desc">家里还有几位重要成员，和我们一起迎接新生活。它们也是这场婚礼里悄悄被祝福的小家人。</p>
+        <div class="cat-photo-grid">
+          <div class="cat-photo-slot">
+            <img src="./assets/cat-1.jpg" alt="家里的猫猫" loading="lazy" width="400" height="400">
+          </div>
+          <div class="cat-photo-slot">
+            <img src="./assets/cat-2.jpg" alt="家里的猫猫" loading="lazy" width="400" height="400">
+          </div>
+          <div class="cat-photo-slot">
+            <img src="./assets/cat-3.jpg" alt="家里的猫猫与小猫" loading="lazy" width="400" height="400">
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="card">
-      <img class="cover" src="./assets/share-cover.jpg" width="1024" height="682" alt="婚礼请帖封面">
-      <p class="note">如需查看完整页面样式，可复制链接到系统浏览器打开：<br>https://wedding-invite-8k3.pages.dev/index.html</p>
+      <h2 class="title">爱的誓言</h2>
+      <div class="quote">
+        我们愿在往后的岁月里，同甘共苦，彼此扶持。<br>
+        在亲友的见证下，许下一生相守的承诺。
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="title">婚礼流程</h2>
+      <div class="timeline">
+        <div class="tl-row"><div class="time">17:00</div><div class="event">来宾入场，合影留念</div></div>
+        <div class="tl-row"><div class="time">18:00</div><div class="event">婚礼仪式开始</div></div>
+        <div class="tl-row"><div class="time">18:40</div><div class="event">敬酒互动</div></div>
+        <div class="tl-row"><div class="time">19:00</div><div class="event">晚宴开始</div></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="title">联系方式</h2>
+      <p class="note">微信版已关闭在线回执收集，如需沟通出席信息，可直接联系新人。</p>
+      <div class="btns">
+        <a class="link-btn ghost" href="tel:18620075993">联系男方</a>
+        <a class="link-btn ghost" href="tel:18688487138">联系女方</a>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="title">温馨提示</h2>
+      <ul class="tips-list">
+        <li>建议提前 20 分钟到场，方便签到与入座。</li>
+        <li>自驾宾客可将车辆停放在酒店地面停车区。</li>
+        <li>如需协助引导，请提前联系男方或女方电话。</li>
+      </ul>
     </section>
 
     <p class="footer">期待与您共享喜悦 · 刘辰 & 李秋思 敬邀</p>
+    <p class="footer">男方父母：刘治威、陈媛媛 ｜ 女方父母：李学军、杨金奕</p>
   </main>
+
+  <div class="float-toast" id="floatToast" role="status" aria-live="polite"></div>
 
   <script>
     const MAP_TEXT = "湖南省益阳市赫山区高新区梓山路 2 号 薇斯汀主题宴会酒店繁花厅";
-    const FORM_LINK = "https://wj.qq.com/s2/26485420/f448/";
-    const TEMPLATE_TEXT = [
-      "婚礼回执",
-      "姓名：",
-      "是否出席：出席 / 不确定 / 无法出席",
-      "出席人数：",
-      "联系电话：",
-      "祝福留言："
-    ].join("\n");
+    const weddingDate = new Date("2026-09-19T18:00:00+08:00");
+    const dEl = document.getElementById("d");
+    const hEl = document.getElementById("h");
+    const mEl = document.getElementById("m");
+    const sEl = document.getElementById("s");
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const dots = Array.from(document.querySelectorAll(".dot"));
+    const copyMapBtn = document.getElementById("copyMapBtn");
+    const floatToast = document.getElementById("floatToast");
 
-    async function copyText(text, okMsg, failMsg, button) {
+    function pad(num) {
+      return String(num).padStart(2, "0");
+    }
+
+    function renderCountdown() {
+      const now = new Date();
+      let diff = Math.floor((weddingDate - now) / 1000);
+      if (diff < 0) diff = 0;
+      const d = Math.floor(diff / 86400);
+      const h = Math.floor((diff % 86400) / 3600);
+      const m = Math.floor((diff % 3600) / 60);
+      const s = diff % 60;
+      dEl.textContent = String(d);
+      hEl.textContent = pad(h);
+      mEl.textContent = pad(m);
+      sEl.textContent = pad(s);
+    }
+
+    let slideIndex = 0;
+    function showSlide(index) {
+      slides.forEach((slide, i) => slide.classList.toggle("show", i === index));
+      dots.forEach((dot, i) => dot.classList.toggle("active", i === index));
+    }
+
+    function nextSlide() {
+      slideIndex = (slideIndex + 1) % slides.length;
+      showSlide(slideIndex);
+    }
+
+    function createPetal() {
+      const petal = document.createElement("div");
+      petal.className = "petal";
+      petal.style.left = Math.random() * 100 + "vw";
+      const scale = 0.75 + Math.random() * 1.45;
+      petal.style.width = `${12 * scale}px`;
+      petal.style.height = `${8.5 * scale}px`;
+      petal.style.animationDuration = 4.4 + Math.random() * 5.4 + "s";
+      petal.style.opacity = String(0.3 + Math.random() * 0.55);
+      document.body.appendChild(petal);
+      setTimeout(() => petal.remove(), 13000);
+    }
+
+    async function copyText(text) {
       try {
         await navigator.clipboard.writeText(text);
-        button.textContent = okMsg;
+        return true;
       } catch (err) {
-        button.textContent = failMsg;
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        const ok = document.execCommand("copy");
+        textarea.remove();
+        return ok;
       }
-      setTimeout(() => {
-        if (button.id === "copyMapBtn") button.textContent = "复制导航地址";
-        if (button.id === "copyFormBtn") button.textContent = "复制回执链接";
-        if (button.id === "copyTemplateBtn") button.textContent = "复制回执模板";
+    }
+
+    function showToast(message) {
+      floatToast.textContent = message;
+      floatToast.classList.add("show");
+      clearTimeout(showToast.timerId);
+      showToast.timerId = setTimeout(() => {
+        floatToast.classList.remove("show");
       }, 1800);
     }
 
-    document.getElementById("copyMapBtn").addEventListener("click", function () {
-      copyText(MAP_TEXT, "已复制地址", "复制失败，请手动复制", this);
+    copyMapBtn.addEventListener("click", async function () {
+      const copied = await copyText(MAP_TEXT);
+      showToast(copied ? "已复制导航地址" : "复制失败，请长按手动复制");
     });
 
-    document.getElementById("copyFormBtn").addEventListener("click", function () {
-      copyText(FORM_LINK, "已复制链接", "复制失败，请手动复制", this);
-    });
-
-    document.getElementById("copyTemplateBtn").addEventListener("click", function () {
-      copyText(TEMPLATE_TEXT, "已复制模板", "复制失败，请手动复制", this);
-    });
+    renderCountdown();
+    setInterval(renderCountdown, 1000);
+    setInterval(nextSlide, 4200);
+    setInterval(createPetal, 350);
   </script>
 </body>
 </html>
