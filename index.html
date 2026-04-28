@@ -9,10 +9,10 @@
   <meta property="og:description" content="2026年09月19日，诚邀您出席我们的婚礼。">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="刘辰 & 李秋思 婚礼请帖">
-  <meta property="og:url" content="https://cliu44.github.io/wedding-invite/">
-  <link rel="image_src" href="https://cliu44.github.io/wedding-invite/assets/share-cover.jpg">
-  <meta property="og:image" content="https://cliu44.github.io/wedding-invite/assets/share-cover.jpg">
-  <meta property="og:image:secure_url" content="https://cliu44.github.io/wedding-invite/assets/share-cover.jpg">
+  <meta property="og:url" content="https://wedding-invite-8k3.pages.dev/index.html">
+  <link rel="image_src" href="https://wedding-invite-8k3.pages.dev/assets/share-cover.jpg">
+  <meta property="og:image" content="https://wedding-invite-8k3.pages.dev/assets/share-cover.jpg">
+  <meta property="og:image:secure_url" content="https://wedding-invite-8k3.pages.dev/assets/share-cover.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1024">
   <meta property="og:image:height" content="682">
@@ -20,7 +20,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="刘辰 & 李秋思 婚礼请帖">
   <meta name="twitter:description" content="2026年09月19日，诚邀您出席我们的婚礼。">
-  <meta name="twitter:image" content="https://cliu44.github.io/wedding-invite/assets/share-cover.jpg">
+  <meta name="twitter:image" content="https://wedding-invite-8k3.pages.dev/assets/share-cover.jpg">
   <link rel="stylesheet" href="./assets/invite.css">
 </head>
 <body class="locked">
@@ -50,6 +50,10 @@
       <h1>刘辰 ♥ 李秋思</h1>
       <p class="subtitle">谨定于 2026 年 09 月 19 日（农历八月初九）举行婚礼，敬备喜筵，恭候光临</p>
       <button class="music-btn" id="musicBtn">开启背景音乐</button>
+    </section>
+
+    <section class="wechat-safe-tip" id="wechatSafeTip" hidden>
+      微信内为降低拦截风险，导航与问卷链接将改为“复制链接”，可粘贴到系统浏览器打开。
     </section>
 
     <section class="slider" aria-label="婚纱照轮播">
@@ -83,7 +87,7 @@
           <div class="v venue-street">湖南省益阳市赫山区高新区梓山路 2 号</div>
           <div class="address-row">
             <div class="v">薇斯汀主题宴会酒店繁花厅</div>
-            <a class="link-btn ghost inline-nav-btn" href="https://uri.amap.com/search?keyword=%E6%B9%96%E5%8D%97%E7%9C%81%E7%9B%8A%E9%98%B3%E5%B8%82%E8%B5%AB%E5%B1%B1%E5%8C%BA%E9%AB%98%E6%96%B0%E5%8C%BA%E6%A2%93%E5%B1%B1%E8%B7%AF2%E5%8F%B7" target="_blank" rel="noopener">打开导航</a>
+            <a class="link-btn ghost inline-nav-btn" id="mapNavBtn" data-wechat-external="true" href="https://uri.amap.com/search?keyword=%E6%B9%96%E5%8D%97%E7%9C%81%E7%9B%8A%E9%98%B3%E5%B8%82%E8%B5%AB%E5%B1%B1%E5%8C%BA%E9%AB%98%E6%96%B0%E5%8C%BA%E6%A2%93%E5%B1%B1%E8%B7%AF2%E5%8F%B7" target="_blank" rel="noopener">打开导航</a>
           </div>
         </div>
       </div>
@@ -142,7 +146,7 @@
       <h2 class="title">到场回复</h2>
       <p class="rsvp-desc">若您方便出席，欢迎填写到场人数回执，方便我们安排座位与接待。</p>
       <div class="btns">
-        <a class="link-btn danger" id="rsvpFormBtn" href="https://wj.qq.com/s2/26485420/f448/" target="_blank" rel="noopener">腾讯问卷在线回执</a>
+        <a class="link-btn danger" id="rsvpFormBtn" data-wechat-external="true" href="https://wj.qq.com/s2/26485420/f448/" target="_blank" rel="noopener">腾讯问卷在线回执</a>
       </div>
       <div class="btns">
         <button class="ghost" id="copyRsvpBtn">复制回执模板发微信</button>
@@ -153,7 +157,7 @@
       </div>
       <p class="note">
         若你不方便直接填写在线回执，可先点“复制回执模板发微信”，把填写内容直接发给新人。<br>
-        当前在线回执已接入腾讯问卷，微信内可直接打开，便于我们统计席位。
+        当前在线回执接入腾讯问卷；如微信内无法直开，可复制链接后在系统浏览器打开。
       </p>
     </section>
 
@@ -169,14 +173,55 @@
     <p class="footer">期待与您共享喜悦 · 刘辰 & 李秋思 敬邀</p>
     <p class="footer">男方父母：刘治威、陈媛媛 ｜ 女方父母：李学军、杨金奕</p>
   </main>
+  <div class="float-toast" id="floatToast" role="status" aria-live="polite"></div>
 
   <script>
+    (function ensureBestAccessRoute() {
+      const params = new URLSearchParams(window.location.search);
+      const routedFromSmart = params.get("routed") === "smart";
+      const healthyHostKey = "invite-host-healthy:" + window.location.host;
+      const healthyTtlMs = 30 * 60 * 1000;
+
+      if (routedFromSmart) {
+        try {
+          localStorage.setItem(healthyHostKey, String(Date.now()));
+        } catch (err) {
+          // Ignore storage errors in private/incognito contexts.
+        }
+        params.delete("routed");
+        const cleanSearch = params.toString();
+        const cleanUrl = window.location.pathname + (cleanSearch ? "?" + cleanSearch : "") + window.location.hash;
+        window.history.replaceState(null, "", cleanUrl);
+        return;
+      }
+
+      const ua = navigator.userAgent || "";
+      const isWeChat = /MicroMessenger/i.test(ua);
+      // 微信审核对跨域强制跳转非常敏感：微信内禁用自动切线，仅保留同域直开。
+      if (isWeChat) {
+        return;
+      }
+
+      let lastHealthyAt = 0;
+      try {
+        lastHealthyAt = Number(localStorage.getItem(healthyHostKey) || 0);
+      } catch (err) {
+        lastHealthyAt = 0;
+      }
+
+      if (!Number.isFinite(lastHealthyAt) || Date.now() - lastHealthyAt > healthyTtlMs) {
+        window.location.replace("./smart.html");
+      }
+    })();
+
+    const isWeChat = /MicroMessenger/i.test(navigator.userAgent || "");
     const weddingDate = new Date("2026-09-19T18:00:00+08:00");
 
     const dEl = document.getElementById("d");
     const hEl = document.getElementById("h");
     const mEl = document.getElementById("m");
     const sEl = document.getElementById("s");
+    const rsvpFormBtn = document.getElementById("rsvpFormBtn");
     const copyRsvpBtn = document.getElementById("copyRsvpBtn");
     const musicBtn = document.getElementById("musicBtn");
     const openBtn = document.getElementById("openBtn");
@@ -184,6 +229,8 @@
     const mainWrap = document.getElementById("mainWrap");
     const slides = Array.from(document.querySelectorAll(".slide"));
     const dots = Array.from(document.querySelectorAll(".dot"));
+    const wechatSafeTip = document.getElementById("wechatSafeTip");
+    const floatToast = document.getElementById("floatToast");
 
     function pad(num) {
       return String(num).padStart(2, "0");
@@ -247,6 +294,59 @@
       setTimeout(() => {
         copyRsvpBtn.textContent = "复制回执模板发微信";
       }, 1800);
+    }
+
+    async function copyText(text) {
+      try {
+        await navigator.clipboard.writeText(text);
+        return true;
+      } catch (err) {
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+        const ok = document.execCommand("copy");
+        textarea.remove();
+        return ok;
+      }
+    }
+
+    function showToast(message) {
+      if (!floatToast) return;
+      floatToast.textContent = message;
+      floatToast.classList.add("show");
+      clearTimeout(showToast.timerId);
+      showToast.timerId = setTimeout(() => {
+        floatToast.classList.remove("show");
+      }, 1800);
+    }
+
+    async function onWeChatExternalClick(event) {
+      if (!isWeChat) return;
+      event.preventDefault();
+      const link = event.currentTarget;
+      const href = link.getAttribute("href");
+      if (!href) return;
+      const copied = await copyText(href);
+      showToast(copied ? "已复制链接，请在系统浏览器打开" : "复制失败，请长按复制链接");
+    }
+
+    function enableWeChatSafeMode() {
+      if (!isWeChat) return;
+      if (wechatSafeTip) {
+        wechatSafeTip.hidden = false;
+      }
+      const externalLinks = document.querySelectorAll("[data-wechat-external='true']");
+      externalLinks.forEach((link) => {
+        link.removeAttribute("target");
+        link.addEventListener("click", onWeChatExternalClick);
+      });
+      const mapNavBtn = document.getElementById("mapNavBtn");
+      if (mapNavBtn) mapNavBtn.textContent = "复制导航链接";
+      if (rsvpFormBtn) rsvpFormBtn.textContent = "复制问卷链接";
     }
 
     const localBgm = new Audio("./assets/bgm.mp3");
@@ -388,6 +488,7 @@
       mainWrap.classList.add("reveal");
     });
 
+    enableWeChatSafeMode();
     renderCountdown();
     setInterval(renderCountdown, 1000);
     setInterval(nextSlide, 4200);
