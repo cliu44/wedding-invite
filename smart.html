@@ -136,11 +136,17 @@
     const healthPath = "assets/share-cover.jpg";
     let hasRedirected = false;
 
+    function withRoutedMarker(url) {
+      const targetUrl = new URL(url, window.location.href);
+      targetUrl.searchParams.set("routed", "smart");
+      return targetUrl.toString();
+    }
+
     function jumpTo(url, via) {
       if (hasRedirected) return;
       hasRedirected = true;
       statusText.textContent = "已选择 " + via + "，正在跳转…";
-      window.location.replace(url);
+      window.location.replace(withRoutedMarker(url));
     }
 
     async function canReach(base) {

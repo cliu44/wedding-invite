@@ -184,6 +184,37 @@
   </main>
 
   <script>
+    (function ensureBestAccessRoute() {
+      const params = new URLSearchParams(window.location.search);
+      const routedFromSmart = params.get("routed") === "smart";
+      const healthyHostKey = "invite-host-healthy:" + window.location.host;
+      const healthyTtlMs = 30 * 60 * 1000;
+
+      if (routedFromSmart) {
+        try {
+          localStorage.setItem(healthyHostKey, String(Date.now()));
+        } catch (err) {
+          // Ignore storage errors in private/incognito contexts.
+        }
+        params.delete("routed");
+        const cleanSearch = params.toString();
+        const cleanUrl = window.location.pathname + (cleanSearch ? "?" + cleanSearch : "") + window.location.hash;
+        window.history.replaceState(null, "", cleanUrl);
+        return;
+      }
+
+      let lastHealthyAt = 0;
+      try {
+        lastHealthyAt = Number(localStorage.getItem(healthyHostKey) || 0);
+      } catch (err) {
+        lastHealthyAt = 0;
+      }
+
+      if (!Number.isFinite(lastHealthyAt) || Date.now() - lastHealthyAt > healthyTtlMs) {
+        window.location.replace("./smart.html");
+      }
+    })();
+
     const weddingDate = new Date("2026-09-19T18:00:00+08:00");
 
     const dEl = document.getElementById("d");
