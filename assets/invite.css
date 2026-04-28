@@ -610,6 +610,40 @@ button, .link-btn {
   line-height: 1.5;
 }
 
+.wechat-safe-tip {
+  margin-top: 12px;
+  border: 1px dashed #efbfd0;
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: #fff8fb;
+  color: #8b6771;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.float-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  transform: translateX(-50%) translateY(10px);
+  background: rgba(77, 31, 46, 0.92);
+  color: #fff;
+  font-size: 12px;
+  line-height: 1.4;
+  padding: 8px 12px;
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+  z-index: 60;
+}
+
+.float-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 .rsvp-desc {
   margin: 0;
   color: #79575c;
