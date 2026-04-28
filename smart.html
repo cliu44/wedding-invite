@@ -94,6 +94,7 @@
     <div class="loading" aria-hidden="true"></div>
     <div class="status" id="statusText">正在检测线路可达性…</div>
     <div class="links">
+      <a id="sameHostLink" href="./index.html" rel="noopener">当前域名入口</a>
       <a href="https://cliu44.github.io/wedding-invite/index.html" rel="noopener">GitHub 入口</a>
       <a href="https://cdn.jsdelivr.net/gh/cliu44/wedding-invite@main/index.html" rel="noopener">jsDelivr 入口</a>
       <a href="https://cdn.statically.io/gh/cliu44/wedding-invite@main/index.html" rel="noopener">Statically 入口</a>
@@ -104,7 +105,15 @@
 
   <script>
     const statusText = document.getElementById("statusText");
+    const sameHostLink = document.getElementById("sameHostLink");
+    const sameHostUrl = new URL("./index.html", window.location.href).toString();
+    sameHostLink.href = sameHostUrl;
+
     const targets = [
+      {
+        name: "当前域名",
+        url: sameHostUrl
+      },
       {
         name: "jsDelivr",
         url: "https://cdn.jsdelivr.net/gh/cliu44/wedding-invite@main/index.html"
@@ -156,7 +165,7 @@
     async function run() {
       for (const target of targets) {
         statusText.textContent = "正在尝试 " + target.name + "…";
-        // 顺序检测，优先切换到更稳的 CDN 入口。
+        // 顺序检测，优先使用当前域名，再回退到公共镜像。
         const ok = await canReach(target.url);
         if (ok) {
           jumpTo(target.url, target.name);
