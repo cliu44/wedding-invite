@@ -93,44 +93,63 @@
     <p>请稍候，系统会自动检测并跳转到可访问的请帖页面。</p>
     <div class="loading" aria-hidden="true"></div>
     <div class="status" id="statusText">正在检测线路可达性…</div>
-    <div class="links">
+    <div class="links" id="linksWrap">
       <a id="sameHostLink" href="./index.html" rel="noopener">当前域名入口</a>
-      <a href="https://cliu44.github.io/wedding-invite/index.html" rel="noopener">GitHub 入口</a>
-      <a href="https://cdn.jsdelivr.net/gh/cliu44/wedding-invite@main/index.html" rel="noopener">jsDelivr 入口</a>
-      <a href="https://cdn.statically.io/gh/cliu44/wedding-invite@main/index.html" rel="noopener">Statically 入口</a>
-      <a href="https://raw.githack.com/cliu44/wedding-invite/main/index.html" rel="noopener">GitHack 入口</a>
     </div>
-    <p style="font-size:12px;margin-top:10px;">如果未自动跳转，可手动点击上方任一入口。</p>
+    <p style="font-size:12px;margin-top:10px;">如果未自动跳转，可点击“当前域名入口”。</p>
   </main>
 
   <script>
     const statusText = document.getElementById("statusText");
+    const linksWrap = document.getElementById("linksWrap");
     const sameHostLink = document.getElementById("sameHostLink");
     const sameHostUrl = new URL("./index.html", window.location.href).toString();
     sameHostLink.href = sameHostUrl;
+    const ua = navigator.userAgent || "";
+    const isWeChat = /MicroMessenger/i.test(ua);
 
     const targets = [
       {
         name: "当前域名",
         url: sameHostUrl
       },
-      {
-        name: "jsDelivr",
-        url: "https://cdn.jsdelivr.net/gh/cliu44/wedding-invite@main/index.html"
-      },
-      {
-        name: "Statically",
-        url: "https://cdn.statically.io/gh/cliu44/wedding-invite@main/index.html"
-      },
-      {
-        name: "GitHub Pages",
-        url: "https://cliu44.github.io/wedding-invite/index.html"
-      },
-      {
-        name: "GitHack",
-        url: "https://raw.githack.com/cliu44/wedding-invite/main/index.html"
-      }
+      ...(isWeChat
+        ? []
+        : [
+            {
+              name: "jsDelivr",
+              url: "https://cdn.jsdelivr.net/gh/cliu44/wedding-invite@main/index.html"
+            },
+            {
+              name: "Statically",
+              url: "https://cdn.statically.io/gh/cliu44/wedding-invite@main/index.html"
+            },
+            {
+              name: "GitHub Pages",
+              url: "https://cliu44.github.io/wedding-invite/index.html"
+            },
+            {
+              name: "GitHack",
+              url: "https://raw.githack.com/cliu44/wedding-invite/main/index.html"
+            }
+          ])
     ];
+
+    if (!isWeChat) {
+      const fallbackLinks = [
+        { name: "jsDelivr 入口", url: "https://cdn.jsdelivr.net/gh/cliu44/wedding-invite@main/index.html" },
+        { name: "Statically 入口", url: "https://cdn.statically.io/gh/cliu44/wedding-invite@main/index.html" },
+        { name: "GitHub 入口", url: "https://cliu44.github.io/wedding-invite/index.html" },
+        { name: "GitHack 入口", url: "https://raw.githack.com/cliu44/wedding-invite/main/index.html" }
+      ];
+      for (const item of fallbackLinks) {
+        const link = document.createElement("a");
+        link.href = item.url;
+        link.rel = "noopener";
+        link.textContent = item.name;
+        linksWrap.appendChild(link);
+      }
+    }
 
     const timeoutMs = 3800;
     const healthPath = "assets/share-cover.jpg";
@@ -171,7 +190,8 @@
     async function run() {
       for (const target of targets) {
         statusText.textContent = "正在尝试 " + target.name + "…";
-        // 顺序检测，优先使用当前域名，再回退到公共镜像。
+        // 在微信内仅走当前域名，避免跨域自动跳转触发风控。
+        // 非微信环境再回退到公共镜像，提升连通性。
         const ok = await canReach(target.url);
         if (ok) {
           jumpTo(target.url, target.name);

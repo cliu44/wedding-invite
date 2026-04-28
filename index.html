@@ -9,10 +9,10 @@
   <meta property="og:description" content="2026年09月19日，诚邀您出席我们的婚礼。">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="刘辰 & 李秋思 婚礼请帖">
-  <meta property="og:url" content="https://cdn.jsdelivr.net/gh/cliu44/wedding-invite@main/smart.html">
-  <link rel="image_src" href="https://cdn.jsdelivr.net/gh/cliu44/wedding-invite@main/assets/share-cover.jpg">
-  <meta property="og:image" content="https://cdn.jsdelivr.net/gh/cliu44/wedding-invite@main/assets/share-cover.jpg">
-  <meta property="og:image:secure_url" content="https://cdn.jsdelivr.net/gh/cliu44/wedding-invite@main/assets/share-cover.jpg">
+  <meta property="og:url" content="https://wedding-invite-8k3.pages.dev/index.html">
+  <link rel="image_src" href="https://wedding-invite-8k3.pages.dev/assets/share-cover.jpg">
+  <meta property="og:image" content="https://wedding-invite-8k3.pages.dev/assets/share-cover.jpg">
+  <meta property="og:image:secure_url" content="https://wedding-invite-8k3.pages.dev/assets/share-cover.jpg">
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1024">
   <meta property="og:image:height" content="682">
@@ -20,7 +20,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="刘辰 & 李秋思 婚礼请帖">
   <meta name="twitter:description" content="2026年09月19日，诚邀您出席我们的婚礼。">
-  <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/cliu44/wedding-invite@main/assets/share-cover.jpg">
+  <meta name="twitter:image" content="https://wedding-invite-8k3.pages.dev/assets/share-cover.jpg">
   <link rel="stylesheet" href="./assets/invite.css">
 </head>
 <body class="locked">
@@ -187,6 +187,13 @@
         const cleanSearch = params.toString();
         const cleanUrl = window.location.pathname + (cleanSearch ? "?" + cleanSearch : "") + window.location.hash;
         window.history.replaceState(null, "", cleanUrl);
+        return;
+      }
+
+      const ua = navigator.userAgent || "";
+      const isWeChat = /MicroMessenger/i.test(ua);
+      // 微信审核对跨域强制跳转非常敏感：微信内禁用自动切线，仅保留同域直开。
+      if (isWeChat) {
         return;
       }
 
