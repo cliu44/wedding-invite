@@ -610,62 +610,6 @@ button, .link-btn {
   line-height: 1.5;
 }
 
-.access-quick {
-  margin-top: 10px;
-}
-
-.smart-entry-btn {
-  box-shadow: 0 8px 18px rgba(184, 45, 88, 0.2);
-}
-
-.access-details {
-  margin-top: 8px;
-}
-
-.access-details summary {
-  list-style: none;
-  cursor: pointer;
-  user-select: none;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  border-radius: 10px;
-  border: 1px solid #f1bfd0;
-  background: linear-gradient(180deg, #fff, #fff8fb);
-  color: #a44862;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 9px 12px;
-}
-
-.access-details summary::-webkit-details-marker {
-  display: none;
-}
-
-.access-details summary::after {
-  content: "▼";
-  margin-left: 8px;
-  font-size: 11px;
-  opacity: 0.7;
-}
-
-.access-details[open] summary::after {
-  content: "▲";
-}
-
-.access-grid {
-  margin-top: 10px;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 8px;
-}
-
-.mini-link {
-  font-size: 12px;
-  padding: 9px 8px;
-}
-
 .rsvp-desc {
   margin: 0;
   color: #79575c;
@@ -699,9 +643,6 @@ button, .link-btn {
   .inline-nav-btn {
     padding: 6px 9px;
     font-size: 11px;
-  }
-  .access-grid {
-    grid-template-columns: 1fr;
   }
 }
   
