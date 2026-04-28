@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>正在为你选择最佳访问线路…</title>
+  <meta name="description" content="自动检测并跳转到可访问的婚礼请帖线路。">
+  <style>
+    :root {
+      color-scheme: light;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px 16px;
+      font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+      background: radial-gradient(circle at 50% 20%, #fff0f6 0%, #fff7fb 50%, #ffffff 100%);
+      color: #5f3a47;
+    }
+    .card {
+      width: min(520px, 100%);
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid #f2d3df;
+      border-radius: 16px;
+      padding: 18px 16px;
+      box-shadow: 0 10px 26px rgba(130, 72, 99, 0.14);
+    }
+    h1 {
+      margin: 0;
+      font-size: 20px;
+      color: #8f3345;
+      text-align: center;
+    }
+    p {
+      margin: 10px 0 0;
+      color: #7b5964;
+      font-size: 14px;
+      line-height: 1.65;
+      text-align: center;
+    }
+    .loading {
+      margin: 14px auto 0;
+      width: 36px;
+      height: 36px;
+      border: 3px solid #f4d6e2;
+      border-top-color: #cf4d72;
+      border-radius: 50%;
+      animation: spin .9s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .links {
+      margin-top: 14px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    a {
+      display: inline-block;
+      text-decoration: none;
+      border-radius: 10px;
+      border: 1px solid #efbfd0;
+      color: #9f3f5a;
+      background: linear-gradient(180deg, #fff, #fff8fb);
+      text-align: center;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 8px;
+    }
+    .status {
+      margin-top: 12px;
+      font-size: 12px;
+      color: #9b7481;
+      text-align: center;
+      min-height: 1.4em;
+    }
+    @media (max-width: 420px) {
+      .links {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>正在为你选择最佳访问线路</h1>
+    <p>请稍候，系统会自动检测并跳转到可访问的请帖页面。</p>
+    <div class="loading" aria-hidden="true"></div>
+    <div class="status" id="statusText">正在检测线路可达性…</div>
+    <div class="links">
+      <a href="https://cliu44.github.io/wedding-invite/index.html" rel="noopener">GitHub 入口</a>
+      <a href="https://cdn.jsdelivr.net/gh/cliu44/wedding-invite@main/index.html" rel="noopener">jsDelivr 入口</a>
+      <a href="https://cdn.statically.io/gh/cliu44/wedding-invite@main/index.html" rel="noopener">Statically 入口</a>
+      <a href="https://raw.githack.com/cliu44/wedding-invite/main/index.html" rel="noopener">GitHack 入口</a>
+    </div>
+    <p style="font-size:12px;margin-top:10px;">如果未自动跳转，可手动点击上方任一入口。</p>
+  </main>
+
+  <script>
+    const statusText = document.getElementById("statusText");
+    const targets = [
+      {
+        name: "jsDelivr",
+        url: "https://cdn.jsdelivr.net/gh/cliu44/wedding-invite@main/index.html"
+      },
+      {
+        name: "Statically",
+        url: "https://cdn.statically.io/gh/cliu44/wedding-invite@main/index.html"
+      },
+      {
+        name: "GitHub Pages",
+        url: "https://cliu44.github.io/wedding-invite/index.html"
+      },
+      {
+        name: "GitHack",
+        url: "https://raw.githack.com/cliu44/wedding-invite/main/index.html"
+      }
+    ];
+
+    const timeoutMs = 3800;
+    const healthPath = "assets/share-cover.jpg";
+    let hasRedirected = false;
+
+    function jumpTo(url, via) {
+      if (hasRedirected) return;
+      hasRedirected = true;
+      statusText.textContent = "已选择 " + via + "，正在跳转…";
+      window.location.replace(url);
+    }
+
+    async function canReach(base) {
+      const probeUrl = new URL(healthPath, base).toString() + "?t=" + Date.now();
+      const ctrl = new AbortController();
+      const timer = setTimeout(() => ctrl.abort(), timeoutMs);
+      try {
+        const res = await fetch(probeUrl, {
+          method: "GET",
+          mode: "cors",
+          cache: "no-store",
+          signal: ctrl.signal
+        });
+        return res.ok;
+      } catch (_) {
+        return false;
+      } finally {
+        clearTimeout(timer);
+      }
+    }
+
+    async function run() {
+      for (const target of targets) {
+        statusText.textContent = "正在尝试 " + target.name + "…";
+        // 顺序检测，优先切换到更稳的 CDN 入口。
+        const ok = await canReach(target.url);
+        if (ok) {
+          jumpTo(target.url, target.name);
+          return;
+        }
+      }
+      statusText.textContent = "自动检测未命中，请手动点击上方入口。";
+    }
+
+    run();
+  </script>
+</body>
+</html>

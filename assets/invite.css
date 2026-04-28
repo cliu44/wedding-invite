@@ -610,6 +610,29 @@ button, .link-btn {
   line-height: 1.5;
 }
 
+.access-card {
+  background: linear-gradient(180deg, #fffefe, #fff6fa);
+}
+
+.access-tip {
+  margin: 0;
+  color: #7f5d67;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.access-grid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.mini-link {
+  font-size: 12px;
+  padding: 9px 8px;
+}
+
 .rsvp-desc {
   margin: 0;
   color: #79575c;
@@ -643,6 +666,9 @@ button, .link-btn {
   .inline-nav-btn {
     padding: 6px 9px;
     font-size: 11px;
+  }
+  .access-grid {
+    grid-template-columns: 1fr;
   }
 }
   
